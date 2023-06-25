@@ -1,10 +1,14 @@
 import fetch from "node-fetch";
 import env from "../env.js";
 
-export const fetchColumns = async (widgetId) => {
+const items = [];
+
+export const fetchColumns = async (widgetId, fPage = 0, fRequestId = null) => {
     const params = {
+        requestId: fRequestId,
+        page: fPage,
         archived: false,
-        widgetCommonId: widgetId
+        widgetCommonId: widgetId,
     };
 
     const data = await fetch('https://favro.com/api/v1/columns?' + new URLSearchParams(params).toString(), {
@@ -17,5 +21,12 @@ export const fetchColumns = async (widgetId) => {
 
     const response = await data.json();
     const { entities, limit, page, pages, requestId } = response;
+
+    items.push(...entities);
+
+    if (page < pages - 1) {
+        return await fetchColumns(page + 1, requestId);
+    }
+
     return entities;
 }

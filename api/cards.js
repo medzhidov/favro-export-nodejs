@@ -1,13 +1,13 @@
 import fetch from "node-fetch";
 import env from "../env.js";
 
-const cards = [];
+const items = [];
 
-export const fetchCards = async (fPage = 0, fRequestId = null, collectionId) => {
+export const fetchCards = async (collectionId, fPage = 0, fRequestId = null) => {
     const params = {
-        collectionId: collectionId,
         requestId: fRequestId,
         page: fPage,
+        collectionId: collectionId,
         archived: false,
         descriptionFormat: "markdown",
     };
@@ -24,10 +24,10 @@ export const fetchCards = async (fPage = 0, fRequestId = null, collectionId) => 
 
     const { entities, limit, page, pages, requestId } = response;
 
-    cards.push(...entities);
+    items.push(...entities);
 
     if (page < pages - 1) {
-        return await fetchCards(page + 1, requestId, collectionId);
+        return await fetchCards(collectionId, page + 1, requestId);
     }
 
     return entities;

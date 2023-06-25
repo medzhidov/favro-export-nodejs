@@ -1,8 +1,12 @@
 import fetch from "node-fetch";
 import env from "../env.js";
 
-export const fetchCustomFields = async () => {
+const items = [];
+
+export const fetchCustomFields = async (fPage = 0, fRequestId = null) => {
     const params = {
+        requestId: fRequestId,
+        page: fPage,
         archived: false,
     };
 
@@ -16,6 +20,12 @@ export const fetchCustomFields = async () => {
 
     const response = await data.json();
     const { entities, limit, page, pages, requestId } = response;
+
+    items.push(...entities);
+
+    if (page < pages - 1) {
+        return await fetchCustomFields(page + 1, requestId);
+    }
 
     return entities;
 }

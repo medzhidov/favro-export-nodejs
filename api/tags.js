@@ -1,8 +1,12 @@
 import fetch from "node-fetch";
 import env from "../env.js";
 
-export const fetchTags = async () => {
+const items = [];
+
+export const fetchTags = async (fPage = 0, fRequestId = null) => {
     const params = {
+        requestId: fRequestId,
+        page: fPage,
         archived: false,
     };
 
@@ -16,6 +20,12 @@ export const fetchTags = async () => {
 
     const response = await data.json();
     const { entities, limit, page, pages, requestId } = response;
+
+    items.push(...entities);
+
+    if (page < pages - 1) {
+        return await fetchTags(page + 1, requestId);
+    }
 
     return entities;
 }

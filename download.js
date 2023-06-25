@@ -18,7 +18,7 @@ db.data.cards = [];
 
 for (const collection of db.data.collections) {
     console.log(`==> Download cards for collection ${collection.name}`);
-    db.data.cards.push(...(await fetchCards(0, null, collection.collectionId)));
+    db.data.cards.push(...(await fetchCards(collection.collectionId, 0, null)));
 }
 
 // Tags
@@ -39,7 +39,7 @@ for (const widget of db.data.widgets) {
 
 // Custom Fields
 console.log('==> Download Custom Fields');
-db.data.widgets = await fetchCustomFields();
+db.data.customFields = await fetchCustomFields();
 
 // Users
 console.log('==> Download Users');

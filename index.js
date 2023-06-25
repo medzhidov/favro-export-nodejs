@@ -11,7 +11,6 @@ const {cards, collections, customFields, tags, columns, widgets, users} = db.dat
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-
 const exportData = cards.map(card => {
     const collectionId = widgets.find(w => w.widgetCommonId === card.widgetCommonId)?.collectionIds[0];
     const parentCard = cards.find(c => c.cardId === card.parentCardId);
