@@ -11,7 +11,9 @@ const {cards, collections, customFields, tags, columns, widgets, users} = db.dat
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-const exportData = cards.map(card => {
+const uniqueCards = [...new Map(cards.map(item => [item['cardId'], item])).values()];
+
+let exportData = uniqueCards.map(card => {
     const collectionId = widgets.find(w => w.widgetCommonId === card.widgetCommonId)?.collectionIds[0];
     const parentCard = cards.find(c => c.cardId === card.parentCardId);
     const cardCustomFields = {};
@@ -30,14 +32,22 @@ const exportData = cards.map(card => {
             fieldValue = customField.value.map(c => {
                 return field.customFieldItems.find(cfi => cfi.customFieldItemId === c)?.name;
             });
-        } else {
+        } else if (field.type === 'Date') {
+            fieldValue = customField.value?.date?.date;
+        } else if (field.type === 'Link') {
+            fieldValue = customField.link?.url;
+        } else if (field.type === 'Color') {
+            fieldValue = customField.color;
+        } else if (field.type === 'Number') {
+            fieldValue = customField.total;
+        } else if (field.type === 'Text') {
             fieldValue = customField.value;
+        } else {
+            fieldValue = customField;
         }
 
         cardCustomFields[fieldName] = fieldValue;
     }
-
-    // console.log(cardCustomFields);
 
     card = {
         collection: collections.find(c => c.collectionId === collectionId)?.name,
@@ -59,10 +69,6 @@ const exportData = cards.map(card => {
 
 const prepareCsv = async (cards) => {
     const preparedCards = cards.map(c => {
-        if (c.name === 'Не верно отображается тариф в списке рефералов у Партнера') {
-            console.log(c);
-        }
-
         for (const field in c) {
             if (Array.isArray(c[field])) {
                 c[field] = c[field].join(',');
