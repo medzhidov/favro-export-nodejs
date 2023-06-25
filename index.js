@@ -1,7 +1,8 @@
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, mkdirSync } from 'node:fs';
 import db from "./db.js";
+import { json2csv } from "json-2-csv";
 // import './download.js';
 
 await db.read();
@@ -57,10 +58,31 @@ const exportData = cards.map(card => {
     return card;
 });
 
+const prepareForCsv = (cards) => {
+    return cards.map(c => {
+        for (const field in c) {
+            if (Array.isArray(c[field])) {
+                c[field] = c[field].join(',');
+            }
+
+            if (c[field] === undefined || c[field] === null) {
+                c[field] = '';
+            }
+        }
+
+        return c;
+    })
+};
+
 writeFileSync(join(__dirname, 'export/json/export.json'), JSON.stringify(exportData, null, 4));
+writeFileSync(join(__dirname, 'export/csv/export.csv'), await json2csv(prepareForCsv(exportData)));
 
 for (const widget of widgets) {
     const widgetCards = exportData.filter(c => c.board === widget.name);
 
-    writeFileSync(join(__dirname, `export/json/groupByBoards/${widget.name.replace(/[^A-Za-zА-Яа-я0-9]/g, '')}.json`), JSON.stringify(widgetCards, null, 4));
+    mkdirSync(join(__dirname, `export/json/groupByBoards`), {recursive: true});
+    mkdirSync(join(__dirname, `export/csv/groupByBoards`), {recursive: true});
+
+    writeFileSync(join(__dirname, `export/json/groupByBoards/${widget.name.replace(/[^A-Za-zА-Яа-я0-9\s]/g, '')}.json`), JSON.stringify(widgetCards, null, 4));
+    writeFileSync(join(__dirname, `export/csv/groupByBoards/${widget.name.replace(/[^A-Za-zА-Яа-я0-9\s]/g, '')}.csv`), await json2csv(prepareForCsv(widgetCards)));
 }

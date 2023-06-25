@@ -1,6 +1,9 @@
 lockfileVersion: '6.0'
 
 dependencies:
+  json-2-csv:
+    specifier: ^4.0.0
+    version: 4.0.0
   lowdb:
     specifier: ^6.0.1
     version: 6.0.1
@@ -50,6 +53,16 @@ packages:
     engines: {node: '>= 12'}
     dev: false
 
+  /deeks@3.0.0:
+    resolution: {integrity: sha512-go4YE5vDMzDNzC9OqK7iIQd6agUUqZdBiw3TD2niRxsKGdGdB1FW8eZdrWsyCRZCNkBjV5Vutcx5uT1AikEPCg==}
+    engines: {node: '>= 16'}
+    dev: false
+
+  /doc-path@4.0.0:
+    resolution: {integrity: sha512-By/OF7rbws/bgExPZW10gHASoy3sACwXKKpKBIzYk/E19nX8q8IbILbreCeCYAVFIcO9FOxDjFYbm45wvn4I6w==}
+    engines: {node: '>=16'}
+    dev: false
+
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
     dev: false
@@ -82,6 +95,14 @@ packages:
   /is-fullwidth-code-point@3.0.0:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
     engines: {node: '>=8'}
+    dev: false
+
+  /json-2-csv@4.0.0:
+    resolution: {integrity: sha512-r8WXuuLgVbeufMuCyzUXSp8VP9YK4BTuzM7rTG0X85MPKuHKa8JD6LHrp0rEKVCtBSgHA3LMu/VjrZHx+851DQ==}
+    engines: {node: '>= 16'}
+    dependencies:
+      deeks: 3.0.0
+      doc-path: 4.0.0
     dev: false
 
   /lowdb@6.0.1:
