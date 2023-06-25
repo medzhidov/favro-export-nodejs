@@ -1,8 +1,7 @@
 import fetch from "node-fetch";
-import db from "../db.js";
-import {cliParams} from "../download.js";
+import env from "../env.js";
 
-const entities = [];
+const cards = [];
 
 export const fetchCards = async (fPage = 0, fRequestId = null, collectionId) => {
     const params = {
@@ -16,8 +15,8 @@ export const fetchCards = async (fPage = 0, fRequestId = null, collectionId) => 
     const data = await fetch('https://favro.com/api/v1/cards?' + new URLSearchParams(params).toString(), {
         method: "GET",
         headers: {
-            OrganizationId: "2cf01cab627b544f26ea742c",
-            Authorization: 'Basic '+btoa(`${cliParams.email}:${cliParams.token}`),
+            OrganizationId: env.organizationId,
+            Authorization: 'Basic '+btoa(`${env.email}:${env.token}`),
         },
     })
 
@@ -25,9 +24,7 @@ export const fetchCards = async (fPage = 0, fRequestId = null, collectionId) => 
 
     const { entities, limit, page, pages, requestId } = response;
 
-    entities.push(...entities);
-
-    console.log(`Page ${page + 1} of ${pages}, requestId: ${requestId}`);
+    cards.push(...entities);
 
     if (page < pages - 1) {
         return await fetchCards(page + 1, requestId, collectionId);

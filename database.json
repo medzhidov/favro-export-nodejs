@@ -61556,7 +61556,74 @@
       ]
     }
   ],
-  "users": [],
+  "users": [
+    {
+      "userId": "hYD35jcrpRA4kdfCi",
+      "name": "Никита Коробков",
+      "email": "korobkov@skillspace.ru",
+      "organizationRole": "administrator"
+    },
+    {
+      "userId": "ikfNKFqPLwfixZQDM",
+      "name": "Мария Мухина",
+      "email": "muhina@skillspace.ru",
+      "organizationRole": "fullMember"
+    },
+    {
+      "userId": "vDuMaJDQDfBFmqZWa",
+      "name": "Кирилл Куликов",
+      "email": "kulikov@skillspace.ru",
+      "organizationRole": "disabled"
+    },
+    {
+      "userId": "ZNnogzg4rkrtfYuj6",
+      "name": "Лев Домашних",
+      "email": "domashnih@sksp.site",
+      "organizationRole": "fullMember"
+    },
+    {
+      "userId": "gmexGgdEAtvj2kxqj",
+      "name": "Алексей Забарин",
+      "email": "zabarin@skillspace.ru",
+      "organizationRole": "fullMember"
+    },
+    {
+      "userId": "EE6Lok4PZyzZfuTG5",
+      "name": "Илья Меджидов",
+      "email": "medzhidov@skillspace.ru",
+      "organizationRole": "administrator"
+    },
+    {
+      "userId": "Y2rmvZ498aG8GiXMi",
+      "name": "Богдае Хачатурян",
+      "email": "bogdan@sksp.site",
+      "organizationRole": "fullMember"
+    },
+    {
+      "userId": "HWX5W22RdAFMKPpnr",
+      "name": "Халик Алешин",
+      "email": "aleshin@skillspace.ru",
+      "organizationRole": "fullMember"
+    },
+    {
+      "userId": "fptf4WaEi3teBNDZa",
+      "name": "Наташа Минькина",
+      "email": "minkina@skillspace.ru",
+      "organizationRole": "disabled"
+    },
+    {
+      "userId": "96XnLGd8C7DpAAb8K",
+      "name": "Георгий Начкебия",
+      "email": "georgi@sksp.site",
+      "organizationRole": "fullMember"
+    },
+    {
+      "userId": "yHhbEzXQZ5EzSicxS",
+      "name": "Дарья Шевницына",
+      "email": "daria@sksp.site",
+      "organizationRole": "fullMember"
+    }
+  ],
   "collections": [
     {
       "collectionId": "4af778a445740b0e3ec2312a",

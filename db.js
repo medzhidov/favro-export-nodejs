@@ -10,6 +10,14 @@ const file = join(__dirname, 'database.json')
 
 // Configure lowdb to write data to JSON file
 const adapter = new JSONFile(file)
-const defaultData = { cards: [], customFields: [], users: [] };
+const defaultData = {
+    cards: [],
+    customFields: [],
+    widgets: [],
+    users: [],
+    tags: [],
+    columns: [],
+    collections: []
+};
 
 export default new Low(adapter, defaultData);

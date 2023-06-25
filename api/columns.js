@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import {cliParams} from "../download.js";
+import env from "../env.js";
 
 export const fetchColumns = async (widgetId) => {
     const params = {
@@ -10,8 +10,8 @@ export const fetchColumns = async (widgetId) => {
     const data = await fetch('https://favro.com/api/v1/columns?' + new URLSearchParams(params).toString(), {
         method: "GET",
         headers: {
-            OrganizationId: "2cf01cab627b544f26ea742c",
-            Authorization: 'Basic '+btoa(`${cliParams.email}:${cliParams.token}`),
+            OrganizationId: env.organizationId,
+            Authorization: 'Basic '+btoa(`${env.email}:${env.token}`),
         },
     })
 

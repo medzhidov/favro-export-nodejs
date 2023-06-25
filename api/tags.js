@@ -1,5 +1,5 @@
 import fetch from "node-fetch";
-import {cliParams} from "../download.js";
+import env from "../env.js";
 
 export const fetchTags = async () => {
     const params = {
@@ -9,8 +9,8 @@ export const fetchTags = async () => {
     const data = await fetch('https://favro.com/api/v1/tags?' + new URLSearchParams(params).toString(), {
         method: "GET",
         headers: {
-            OrganizationId: "2cf01cab627b544f26ea742c",
-            Authorization: 'Basic '+btoa(`${cliParams.email}:${cliParams.token}`),
+            OrganizationId: env.organizationId,
+            Authorization: 'Basic '+btoa(`${env.email}:${env.token}`),
         },
     })
 

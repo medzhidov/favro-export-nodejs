@@ -1,12 +1,12 @@
 import fetch from "node-fetch";
 import env from "../env.js";
 
-export const fetchWidgets = async () => {
+export const fetchUsers = async () => {
     const params = {
         archived: false,
     };
 
-    const data = await fetch('https://favro.com/api/v1/widgets?' + new URLSearchParams(params).toString(), {
+    const data = await fetch('https://favro.com/api/v1/users?' + new URLSearchParams(params).toString(), {
         method: "GET",
         headers: {
             OrganizationId: env.organizationId,
@@ -16,5 +16,6 @@ export const fetchWidgets = async () => {
 
     const response = await data.json();
     const { entities, limit, page, pages, requestId } = response;
+
     return entities;
 }
