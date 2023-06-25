@@ -42,7 +42,10 @@ let exportData = uniqueCards.map(card => {
             fieldValue = customField.total;
         } else if (field.type === 'Text') {
             fieldValue = customField.value;
+        } else if (field.type === 'Timeline') {
+            fieldValue = customField.value;
         } else {
+            console.log(field.type);
             fieldValue = customField;
         }
 
