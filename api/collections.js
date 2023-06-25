@@ -27,5 +27,5 @@ export const fetchCollections = async (fPage = 0, fRequestId = null) => {
         return await fetchCollections(page + 1, requestId);
     }
 
-    return entities;
+    return items;
 }

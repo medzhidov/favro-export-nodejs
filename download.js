@@ -9,7 +9,7 @@ import {fetchUsers} from "./api/users.js";
 
 await db.read();
 
-//  Collections
+// Collections
 console.log('==> Download Collections');
 db.data.collections = await fetchCollections();
 

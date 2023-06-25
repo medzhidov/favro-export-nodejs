@@ -27,5 +27,5 @@ export const fetchWidgets = async (fPage = 0, fRequestId = null) => {
         return await fetchWidgets(page + 1, requestId);
     }
 
-    return entities;
+    return items;
 }

@@ -28,5 +28,5 @@ export const fetchColumns = async (widgetId, fPage = 0, fRequestId = null) => {
         return await fetchColumns(page + 1, requestId);
     }
 
-    return entities;
+    return items;
 }

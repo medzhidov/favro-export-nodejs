@@ -27,5 +27,5 @@ export const fetchCustomFields = async (fPage = 0, fRequestId = null) => {
         return await fetchCustomFields(page + 1, requestId);
     }
 
-    return entities;
+    return items;
 }

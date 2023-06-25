@@ -26,9 +26,11 @@ export const fetchCards = async (collectionId, fPage = 0, fRequestId = null) => 
 
     items.push(...entities);
 
+    console.log(entities.length);
+
     if (page < pages - 1) {
         return await fetchCards(collectionId, page + 1, requestId);
     }
 
-    return entities;
+    return items;
 };
