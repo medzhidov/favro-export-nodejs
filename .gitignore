@@ -209,5 +209,8 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-export/*
-!export/.gitkeep
+export/csv/*
+!export/csv/.gitkeep
+
+export/json/*
+!export/json/.gitkeep

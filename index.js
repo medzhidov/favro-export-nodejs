@@ -9,10 +9,9 @@ await db.read();
 const {cards, collections, customFields, tags, columns, widgets, users} = db.data;
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
-const file = join(__dirname, 'export/export.json')
 
 
-const exportData = JSON.stringify(cards.map(card => {
+const exportData = cards.map(card => {
     const collectionId = widgets.find(w => w.widgetCommonId === card.widgetCommonId)?.collectionIds[0];
     const parentCard = cards.find(c => c.cardId === card.parentCardId);
     const cardCustomFields = {};
@@ -56,6 +55,12 @@ const exportData = JSON.stringify(cards.map(card => {
     };
 
     return card;
-}), null, 4);
+});
 
-writeFileSync(file, exportData);
+writeFileSync(join(__dirname, 'export/json/export.json'), JSON.stringify(exportData, null, 4));
+
+for (const widget of widgets) {
+    const widgetCards = exportData.filter(c => c.board === widget.name);
+
+    writeFileSync(join(__dirname, `export/json/groupByBoards/${widget.name.replace(/[^A-Za-zА-Яа-я0-9]/g, '')}.json`), JSON.stringify(widgetCards, null, 4));
+}
