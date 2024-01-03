@@ -1,4 +1,5 @@
 # Favro.com exporter
+`bun download.ts` — скачать все актуальные данные
 
 `--organizationId=*********` - required organizationId
 
@@ -6,4 +7,6 @@
 
 `--token=******` - required Favro admin's password or api token
 
+
+`bun index.ts` — подготовить данные для импорта
 Result will placed in `export` folder.

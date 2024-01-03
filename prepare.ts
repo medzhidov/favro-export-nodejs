@@ -3,7 +3,6 @@ import { fileURLToPath } from 'node:url';
 import { writeFileSync, mkdirSync } from 'node:fs';
 import db from "./db.js";
 import { json2csv } from "json-2-csv";
-// import './download.js';
 
 await db.read();
 

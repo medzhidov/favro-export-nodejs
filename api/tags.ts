@@ -1,16 +1,15 @@
-import fetch from "node-fetch";
-import env from "../env.js";
+import env from "../env";
 
 const items = [];
 
-export const fetchCustomFields = async (fPage = 0, fRequestId = null) => {
+export const fetchTags = async (fPage = 0, fRequestId = null) => {
     const params = {
         requestId: fRequestId,
-        page: fPage,
-        archived: false,
+        page: '' + fPage,
+        archived: 'false',
     };
 
-    const data = await fetch('https://favro.com/api/v1/customfields?' + new URLSearchParams(params).toString(), {
+    const data = await fetch('https://favro.com/api/v1/tags?' + new URLSearchParams(params).toString(), {
         method: "GET",
         headers: {
             OrganizationId: env.organizationId,
@@ -24,7 +23,7 @@ export const fetchCustomFields = async (fPage = 0, fRequestId = null) => {
     items.push(...entities);
 
     if (page < pages - 1) {
-        return await fetchCustomFields(page + 1, requestId);
+        return await fetchTags(page + 1, requestId);
     }
 
     return items;

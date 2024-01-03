@@ -1,4 +1,4 @@
-import db from "./db.js";
+import db from "./db";
 import {fetchCards} from "./api/cards.js";
 import {fetchCollections} from "./api/collections.js";
 import {fetchTags} from "./api/tags.js";

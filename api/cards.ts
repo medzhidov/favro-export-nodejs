@@ -1,16 +1,17 @@
-import fetch from "node-fetch";
-import env from "../env.js";
+import env from "../env";
 
 const items = [];
 
-export const fetchCollections = async (fPage = 0, fRequestId = null) => {
+export const fetchCards = async (collectionId, fPage = 0, fRequestId = null) => {
     const params = {
         requestId: fRequestId,
-        page: fPage,
-        archived: false,
+        page: '' + fPage,
+        collectionId: collectionId,
+        archived: 'false',
+        descriptionFormat: "markdown",
     };
 
-    const data = await fetch('https://favro.com/api/v1/collections?' + new URLSearchParams(params).toString(), {
+    const data = await fetch('https://favro.com/api/v1/cards?' + new URLSearchParams(params).toString(), {
         method: "GET",
         headers: {
             OrganizationId: env.organizationId,
@@ -19,13 +20,16 @@ export const fetchCollections = async (fPage = 0, fRequestId = null) => {
     })
 
     const response = await data.json();
+
     const { entities, limit, page, pages, requestId } = response;
 
     items.push(...entities);
 
+    console.log(entities.length);
+
     if (page < pages - 1) {
-        return await fetchCollections(page + 1, requestId);
+        return await fetchCards(collectionId, page + 1, requestId);
     }
 
     return items;
-}
+};
